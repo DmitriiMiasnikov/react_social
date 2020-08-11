@@ -1,0 +1,13 @@
+.friends {
+    margin-top: 40px;
+    .title {
+        margin-left: 20px;
+    }
+    .wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        padding: 5px 0 0 15px;
+        box-sizing: border-box;
+    }
+}

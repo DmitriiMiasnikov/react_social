@@ -1,0 +1,29 @@
+.wrapper {
+  position: relative;
+  .img {
+    background-color: rgb(223, 185, 185);
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+  }
+  .name {
+    display: inline-block;
+    font-size: 28px;
+  }
+  .avatar {
+    height: 100px;
+    width: 100px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    margin: 10px 20px 0 0;
+    float: left;
+  }
+  .text {
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
+}

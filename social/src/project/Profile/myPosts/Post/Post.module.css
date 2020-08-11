@@ -1,0 +1,26 @@
+.post {
+  min-height: 70px;
+  margin: 0px 40px 40px 40px;
+  background-color: rgb(182, 131, 131);
+  position: relative;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.pic {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: indigo;
+  float: left;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.message {
+  display: inline-block;
+  font-size: 24px;
+  margin-left: 20px;
+  top: -5px;
+}

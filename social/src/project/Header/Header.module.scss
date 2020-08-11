@@ -1,0 +1,14 @@
+.header {
+  grid-area: h;
+  background-color: grey;
+  position: relative;
+  .loginBlock {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    font-size: 24px;
+    .left {
+      margin-left: 10px;
+    }
+    }
+}
