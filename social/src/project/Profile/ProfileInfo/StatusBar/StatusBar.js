@@ -28,7 +28,7 @@ class StatusBar extends React.Component {
                 status: this.props.status
             })
         }
-      }
+    }
 
     render() {
         return (
