@@ -4,6 +4,7 @@ import styles from './StatusBar.module.scss';
 class StatusBar extends React.Component {
     state = {
         inputIsShown: false,
+        status: this.props.status
     }
     showInput = () => {
         this.setState({
@@ -14,16 +15,24 @@ class StatusBar extends React.Component {
         this.setState({
             inputIsShown: false
         })
+        this.props.updateStatus(this.state.status)
     }
+    onStatusChange = (e) => {
+        this.setState({
+            status: e.currentTarget.value
+        })
+    }
+
     render() {
         return (
             <div className={styles.wrapper}>
                 {
                     this.state.inputIsShown ? (
-                        <div><input autoFocus={true} value={this.props.status} onBlur={this.hideInput}></input></div>
+                        <div><input autoFocus={true} value={this.state.status}
+                            onChange={this.onStatusChange} onBlur={this.hideInput}></input></div>
                     ) : (
-                            <div onDoubleClick = {this.showInput}>
-                                {this.props.status}
+                            <div onDoubleClick={this.showInput}>
+                                {this.state.status ? this.state.status : 'set status'}
                             </div>
                         )
                 }

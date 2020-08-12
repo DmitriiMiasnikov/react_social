@@ -5,11 +5,11 @@ LEFT_LOGIN = 'LEFT-LOGIN',
 LOGIN = 'LOGIN'
 
 let initialState = {
-    id: null,
+    id: 9749,
     email: null,
     login: null,
     isFetching: true, 
-    isAuth: false,
+    isAuth: true,
 }
 
 const authReducer = (state = initialState, action) => {

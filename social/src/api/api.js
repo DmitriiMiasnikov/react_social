@@ -16,10 +16,25 @@ export const usersAPI = {
         return instance.get(`auth/me`).then(response => response.data)
     },
     openProfile (userId) {
-        return instance.get(`profile/${userId}`)
-            .then(response => response.data)
+        console.warn('warning! please use profileAPI.openProfile() method')
+        return profileAPI.openProfile(userId)
     },
     followUser (id) {
         return instance.post(`follow/${id}`)
+    }
+}
+
+export const profileAPI = {
+    openProfile (userId) {
+        return instance.get(`profile/${userId}`)
+            .then(response => response.data)
+    },
+    getStatus (userId) {
+        return instance.get(`profile/status/${userId}`)
+        .then(response => response.data)
+    },
+    updateStatus (status) {
+        return instance.put(`profile/status`, {status: status})
+        .then(response => response.data)
     }
 }

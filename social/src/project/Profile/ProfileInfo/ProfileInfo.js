@@ -13,7 +13,7 @@ const ProfileInfo = (props) => {
         title of content
               </div>
       <div className={styles.name}>{props.profile.fullName}</div>
-      <StatusBar status = {'props.status'}/>
+      <StatusBar status = {props.status} updateStatus={props.updateStatus}/>
       <div className={styles.avatar}>
         <img src = {props.profile.photos.small === null ? maleUser : props.profile.photos.small}></img>
               </div>
