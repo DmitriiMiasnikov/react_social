@@ -2,7 +2,9 @@ import { usersAPI } from './../api/api'
 
 const SET_USER_DATA = 'SET-USER-DATA',
 LEFT_LOGIN = 'LEFT-LOGIN',
-LOGIN = 'LOGIN'
+LOGIN = 'LOGIN',
+ON_SUBMIT_REGISTRATION = 'ON_SUBMIT_REGISTRATION',
+VALIDATE_REGISTRATION = 'VALIDATE_REGISTRATION'
 
 let initialState = {
     id: 9749,
@@ -10,6 +12,8 @@ let initialState = {
     login: null,
     isFetching: true, 
     isAuth: true,
+    registrationData: null,
+    registrationNewText: null
 }
 
 const authReducer = (state = initialState, action) => {
@@ -22,6 +26,12 @@ const authReducer = (state = initialState, action) => {
         }
         case (LOGIN): {
             return {...state, isAuth: true }
+        }
+        case (ON_SUBMIT_REGISTRATION): {
+            return {...state, registrationData: action.data }
+        }
+        case (VALIDATE_REGISTRATION): {
+            return {...state, registrationNewText: action.data }
         }
         default: break;
     }
@@ -45,5 +55,11 @@ export const authUserThunk = () => {
             }
           })
     }
+}
+export const sendRegistrationData = (data) => {
+    return { type: ON_SUBMIT_REGISTRATION, data: data }
+}
+export const changeTextInput = (data) => {
+    return { type: VALIDATE_REGISTRATION, data: data }
 }
 export default authReducer;

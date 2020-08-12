@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Login from './Login'
-import {  } from '../../state/authReducer';
+import { sendRegistrationData, changeTextInput } from '../../state/authReducer';
 
 class LoginContainer extends React.Component {
   componentDidMount() {
 
   }
   render = () => {
-    return <Login />
+    return <Login {...this.props}/>
   }
 }
 
@@ -19,5 +19,6 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-
+  sendRegistrationData,
+  changeTextInput
 })(LoginContainer);

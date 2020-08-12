@@ -1,21 +1,38 @@
 .wrapper {
+    margin-left: 230px;
     padding: 20px;
     box-sizing: border-box;
     display: inline-block;
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
     .title {
         font-size: 28px;
     }
     .line {
         margin-top: 8px;
         display: flex;
-        justify-content: space-between;
-        width: 270px;
+        flex-direction: row;
+        margin-right: 20px;
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+        .error {
+            margin-left: 10px;
+            font-weight: 600;
+            color: red;
+        }
+        &.checkbox {
+            div {
+                margin-left: -5px;
+            }
+        }
         &.button {
-            button {
-                margin-left: 92px;
+            button:nth-child(1) {
+                margin-left: 98px;
+            }
+            button:nth-child(2) {
+                margin-left: 10px;
             }
         }
     }
