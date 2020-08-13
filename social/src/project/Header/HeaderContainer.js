@@ -1,7 +1,9 @@
 import React from 'react';
 import Header from './Header'
 import { leftLogin, authLogin, authUserThunk } from './../../state/authReducer'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
@@ -21,4 +23,7 @@ const mapStateToProps = (state) => {
     id: state.auth.id
   }
 }
-export default connect(mapStateToProps, {leftLogin, authLogin, authUserThunk })(HeaderContainer);
+export default compose(
+  connect(mapStateToProps, {leftLogin, authLogin, authUserThunk }),
+  withRouter
+)(HeaderContainer);
