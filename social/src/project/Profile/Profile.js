@@ -9,7 +9,8 @@ const Profile = (props) => {
       <div className={styles.img}>
         title of content
       </div>
-      <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} />
+      <ProfileInfo profile={props.profile} status={props.status} 
+        updateStatus={props.updateStatus} isFetching = {props.isFetching}/>
       <MyPostsContainer />
     </div>
   );

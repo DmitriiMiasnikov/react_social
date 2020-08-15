@@ -5,7 +5,7 @@ import maleUser from './../../../assets/img/male-user.png';
 import StatusBar from './StatusBar/StatusBar'
 
 const ProfileInfo = (props) => {
-  if (!props.profile) {
+  if (!props.profile || props.isFetching) {
     return <Loading isFetching = {props.isFetching} />
   }
   return (

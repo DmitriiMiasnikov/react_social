@@ -3,7 +3,8 @@ import { profileAPI } from './../api/api'
 const ADD_POST = 'ADD-POST',
     UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT',
     SET_USER_PROFILE = 'SET-USER-PROFILE',
-    SET_STATUS = 'SET-STATUS'
+    SET_STATUS = 'SET-STATUS',
+    IS_FETCHING = 'IS-FETCHING';
 
 let initialState = {
     postsData: [
@@ -12,7 +13,8 @@ let initialState = {
     ],
     newPostText: '',
     profile: null,
-    status: ''
+    status: '',
+    isFetching: true,
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -43,6 +45,9 @@ const profileReducer = (state = initialState, action) => {
                 status: action.SET_STATUS
             };
         }
+        case (IS_FETCHING): {
+            return { ...state, isFetching: action.loading }
+        }
         default: break;
     }
     return state;
@@ -61,8 +66,10 @@ export const setStatus = (status) => {
 }
 export const getUserProfile = (userId) => {
     return (dispatch) => {
+        dispatch(isFetchingToggle(true))
         profileAPI.openProfile(userId).then(data => {
             dispatch(setUserProfile(data))
+            dispatch(isFetchingToggle(false))
         })
     }
 }
@@ -79,5 +86,8 @@ export const updateStatus = (status) => {
             dispatch(setStatus(data))
         })
     }
+}
+export const isFetchingToggle = (loading) => {
+    return { type: IS_FETCHING, loading }
 }
 export default profileReducer;

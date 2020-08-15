@@ -26,7 +26,8 @@ const mapStateToProps = (state) => {
     profile: state.profile.profile,
     currentLogin: state.auth.id,
     isAuth: state.auth.isAuth,
-    status: state.profile.status
+    status: state.profile.status,
+    isFetching: state.profile.isFetching,
   }
 }
 
