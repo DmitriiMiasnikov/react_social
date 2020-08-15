@@ -3,23 +3,10 @@ import styles from './Login.module.scss';
 import { Form, Field } from 'react-final-form'
 
 const LoginForm = (props) => {
-  const onSubmit = (data) => {
-    return props.sendRegistrationData(data)
-  }, validate = (data) => {
-    const err = {};
-    if (!data.login) err.login = 'Введите имя'
-    if (!data.password) err.password = 'Введите пароль'
-    if (!data.repeatPassword) {
-      err.repeatPassword = 'Повторите пароль'
-    } else if (data.password !== data.repeatPassword) err.repeatPassword = 'Не совпадает пароль'
-    props.changeTextInput(data)
-    return err
-  }
-
   return (
     <Form
-      onSubmit={onSubmit}
-      validate={validate}
+      onSubmit={props.onSubmit}
+      validate={props.validate}
       render={({ handleSubmit, form, submitting }) => (
         <form onSubmit={handleSubmit}>
           <div className={styles.line}>
