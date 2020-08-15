@@ -1,17 +1,15 @@
 import React from 'react';
 import styles from './ProfileInfo.module.scss';
+import Loading from './../../../assets/Loading/Loading';
 import maleUser from './../../../assets/img/male-user.png';
 import StatusBar from './StatusBar/StatusBar'
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
-    return <div></div>
+    return <Loading isFetching = {props.isFetching} />
   }
   return (
     <div className = {styles.wrapper}>
-      <div className={styles.img}>
-        title of content
-              </div>
       <div className={styles.name}>{props.profile.fullName}</div>
       <StatusBar status = {props.status} updateStatus={props.updateStatus}/>
       <div className={styles.avatar}>

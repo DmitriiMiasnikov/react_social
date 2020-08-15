@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Users.module.scss';
 import maleIcon from './../../assets/img/male-user.png'
-import loading from './../../assets/img/loading.svg';
+import Loading from './../../assets/Loading/Loading'
 import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
@@ -20,9 +20,7 @@ const Users = (props) => {
       }
       <div className={styles.dots}>...</div>
     </div>
-    <div className={styles.loading}>
-      {props.isFetching ? <img src={loading}></img> : null}
-    </div>
+    <Loading isFetching = {props.isFetching} />
     {
       props.usersData.map(el => {
         return (

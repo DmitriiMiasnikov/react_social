@@ -1,0 +1,11 @@
+.wrapper {
+  position: relative;
+  .img {
+    background-color: rgb(223, 185, 185);
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+  }
+}
