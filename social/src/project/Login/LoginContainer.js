@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Login from './Login'
-import { sendRegistrationData, changeTextInput, login, logout } from '../../state/authReducer';
+import { changeTextInput, login, logout } from '../../state/authReducer';
 
 class LoginContainer extends React.Component {
   componentDidMount() {
@@ -32,7 +32,6 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-  sendRegistrationData,
   changeTextInput,
   login,
   logout
