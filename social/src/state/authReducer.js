@@ -1,4 +1,4 @@
-import { usersAPI } from './../api/api'
+import { usersAPI, authAPI } from './../api/api'
 
 const SET_USER_DATA = 'SET-USER-DATA',
 LEFT_LOGIN = 'LEFT-LOGIN',
@@ -37,8 +37,8 @@ const authReducer = (state = initialState, action) => {
     }
     return state;
 }
-export const setAuthUserData = (id, email, login) => {
-    return { type: SET_USER_DATA, data: {id, email, login} }
+export const setAuthUserData = (id, email, login, isAuth) => {
+    return { type: SET_USER_DATA, data: {id, email, login, isAuth} }
 }
 export const leftLogin = () => {
     return { type: LEFT_LOGIN }
@@ -46,12 +46,12 @@ export const leftLogin = () => {
 export const authLogin = () => {
     return { type: LOGIN }
 }
-export const authUserThunk = () => {
+export const getAuthUserData = () => {
     return (dispatch) => {
-        usersAPI.authUser().then(data => {
+        authAPI.me().then(data => {
             if (data.resultCode === 0) {
               let {id, login, email} = data.data;
-              dispatch(setAuthUserData(id, email, login))
+              dispatch(setAuthUserData(id, email, login, true))
             }
           })
     }
@@ -62,4 +62,24 @@ export const sendRegistrationData = (data) => {
 export const changeTextInput = (data) => {
     return { type: VALIDATE_REGISTRATION, data: data }
 }
+export const login = (email, password, rememberme) => {
+    return (dispatch) => {
+        authAPI.login(email, password, rememberme).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(getAuthUserData())
+            }
+          })
+    }
+}
+export const logout = (email, password, rememberme) => {
+    return (dispatch) => {
+        authAPI.logout(email, password, rememberme).then(data => {
+            if (data.resultCode === 0) {
+                let {id, login, email} = data.data;
+                dispatch(setAuthUserData(null, null, null, false))
+            }
+          })
+    }
+}
+
 export default authReducer;

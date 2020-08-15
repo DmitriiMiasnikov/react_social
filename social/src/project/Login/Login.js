@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Login.module.scss';
-import { Form, Field } from 'react-final-form'
+import { Form, Field } from 'react-final-form';
+import { Redirect } from 'react-router-dom';
 
 const LoginForm = (props) => {
   return (
@@ -45,7 +46,7 @@ const LoginForm = (props) => {
           <div className={`${styles.line} ${styles.checkbox}`}>
             <label></label>
             <div>
-              <Field name='check' value='remember' component='input' type='checkbox' />
+              <Field name='rememberme' value={true} component='input' type='checkbox' />
             Запомнить меня</div>
           </div>
           <div className={`${styles.line} ${styles.button}`}>
@@ -59,6 +60,9 @@ const LoginForm = (props) => {
 }
 
 const Login = (props) => {
+  if (props.isAuth) {
+    return <Redirect to={'/profile'}/>
+  }
   return <div className={styles.wrapper}>
     <div className={styles.title}>Регистрация:</div>
     <LoginForm {...props} />

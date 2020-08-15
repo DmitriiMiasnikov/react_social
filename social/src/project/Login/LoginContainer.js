@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Login from './Login'
-import { sendRegistrationData, changeTextInput } from '../../state/authReducer';
+import { sendRegistrationData, changeTextInput, login, logout } from '../../state/authReducer';
 
 class LoginContainer extends React.Component {
   componentDidMount() {
   }
   onSubmit = (data) => {
-    return this.props.sendRegistrationData(data)
+    return this.props.login(data.login, data.password, data.rememberme ? data.rememberme[0] : false)
   };
   validate = (data) => {
     const err = {};
@@ -21,17 +21,19 @@ class LoginContainer extends React.Component {
     return err
   }
   render = () => {
-    return <Login onSubmit = {this.onSubmit} validate = {this.validate}/>
+    return <Login isAuth={this.props.isAuth} onSubmit = {this.onSubmit} validate = {this.validate}/>
   }
 }
 
 let mapStateToProps = (state) => {
   return {
-
+    isAuth: state.auth.isAuth,
   }
 }
 
 export default connect(mapStateToProps, {
   sendRegistrationData,
-  changeTextInput
+  changeTextInput,
+  login,
+  logout
 })(LoginContainer);
