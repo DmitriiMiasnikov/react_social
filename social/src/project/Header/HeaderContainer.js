@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './Header'
-import { logout, authLogin, getAuthUserData } from './../../state/authReducer'
+import { logout, getAuthUserData } from './../../state/authReducer'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
@@ -23,6 +23,6 @@ const mapStateToProps = (state) => {
   }
 }
 export default compose(
-  connect(mapStateToProps, {logout, authLogin, getAuthUserData }),
+  connect(mapStateToProps, {logout, getAuthUserData }),
   withRouter
 )(HeaderContainer);

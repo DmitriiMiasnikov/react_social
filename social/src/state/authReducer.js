@@ -1,8 +1,7 @@
-import { usersAPI, authAPI } from './../api/api'
+import { authAPI } from './../api/api';
 
 const SET_USER_DATA = 'SET-USER-DATA',
 LEFT_LOGIN = 'LEFT-LOGIN',
-LOGIN = 'LOGIN',
 VALIDATE_REGISTRATION = 'VALIDATE_REGISTRATION'
 
 let initialState = {
@@ -20,9 +19,6 @@ const authReducer = (state = initialState, action) => {
         case (SET_USER_DATA): {
             return {...state, ...action.data }
         }
-        case (LOGIN): {
-            return {...state, isAuth: true }
-        }
         case (VALIDATE_REGISTRATION): {
             return {...state, registrationNewText: action.data }
         }
@@ -35,9 +31,6 @@ export const setAuthUserData = (id, email, login, isAuth) => {
 }
 export const leftLogin = () => {
     return { type: LEFT_LOGIN }
-}
-export const authLogin = () => {
-    return { type: LOGIN }
 }
 export const getAuthUserData = () => {
     return (dispatch) => {
