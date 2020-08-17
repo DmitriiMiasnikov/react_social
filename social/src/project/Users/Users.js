@@ -20,7 +20,9 @@ const Users = (props) => {
       }
       <div className={styles.dots}>...</div>
     </div>
-    <Loading isFetching = {props.isFetching} />
+    <div className = {styles.loading}>
+    { props.isFetching ? <Loading /> : null}
+    </div>
     {
       props.usersData.map(el => {
         return (
@@ -39,10 +41,6 @@ const Users = (props) => {
             <div className={styles.mainBlock}>
               <NavLink to={`./profile/${el.id}`}><div className={styles.name}>{el.name} </div></NavLink>
               <div className={styles.status}>{el.status} </div>
-              {/* <div className={styles.location}>
-                  <div>{el.location.city},</div>
-                  <div>{el.location.country}</div>
-                </div> */}
             </div>
           </div>
         )

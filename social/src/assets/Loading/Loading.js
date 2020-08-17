@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './Loading.module.scss'
 import loading from './../img/loading.svg';
 
-const Loading = (props) => {
+const Loading = () => {
     return (
         <div className={styles.loading}>
-            {props.isFetching ? <img src={loading}></img> : null}
+            <img src={loading}></img>
         </div>
     )
 }

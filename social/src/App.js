@@ -9,26 +9,41 @@ import LoginContainer from './project/Login/LoginContainer';
 import News from './project/News/News';
 import Music from './project/Music/Music';
 import Settings from './project/Settings/Settings';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { initApp } from './state/appReducer';
+import { compose } from 'redux';
+import Loading from './assets/Loading/Loading';
 
-function App(props) {
-  return (
-    <BrowserRouter>
-      <div className={styles.wrapper}>
-        <HeaderContainer />
-        <Menu store = {props.store}/>
-        <div className={styles.content}>
-          <Route  path='/Dialogs' render={() => <DialogsContainer />} />
-          <Route  path='/Profile/:userId?' render={() => <ProfileContainer />} />
-          <Route  path='/Users' render={() => <UsersContainer />} />
-          <Route  path='/login' render={() => <LoginContainer />} />
-          <Route  path='/News' component={News} />
-          <Route  path='/Music' component={Music} />
-          <Route  path='/Settings' component={Settings} />
+class App extends React.Component {
+  componentDidMount() {
+    this.props.initApp()
+  }
+  render() {
+    if (!this.props.initUser) return <Loading/>
+    return (
+        <div className={styles.wrapper}>
+          <HeaderContainer />
+          <Menu store={this.props.store} />
+          <div className={styles.content}>
+            <Route path='/Dialogs' render={() => <DialogsContainer />} />
+            <Route path='/Profile/:userId?' render={() => <ProfileContainer />} />
+            <Route path='/Users' render={() => <UsersContainer />} />
+            <Route path='/login' render={() => <LoginContainer />} />
+            <Route path='/News' component={News} />
+            <Route path='/Music' component={Music} />
+            <Route path='/Settings' component={Settings} />
+          </div>
         </div>
-      </div>
-    </BrowserRouter>
-  );
+    );
+  }
 }
-
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    initUser: state.app.initUser,
+  }
+}
+export default compose(
+  withRouter,
+  connect(mapStateToProps, { initApp }),
+)(App);
