@@ -42,7 +42,7 @@ const profileReducer = (state = initialState, action) => {
         case (SET_STATUS): {
             return {
                 ...state,
-                status: action.SET_STATUS
+                status: action.status
             };
         }
         case (IS_FETCHING): {

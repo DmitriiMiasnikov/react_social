@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './StatusBar.module.scss';
 
 const StatusBarHooks = (props) => {
     const [editMode, setEditMode] = useState(false);
     const [status, setStatus] = useState(props.status);
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
+
     const activateInput = () => {
         setEditMode(true);
     }
