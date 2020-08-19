@@ -7,26 +7,18 @@ class StatusBar extends React.Component {
         status: this.props.status
     }
     showInput = () => {
-        this.setState({
-            inputIsShown: true
-        })
+        this.setState({ inputIsShown: true })
     }
     hideInput = () => {
-        this.setState({
-            inputIsShown: false
-        })
+        this.setState({ inputIsShown: false })
         this.props.updateStatus(this.state.status)
     }
     onStatusChange = (e) => {
-        this.setState({
-            status: e.currentTarget.value
-        })
+        this.setState({ status: e.currentTarget.value })
     }
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.status !== this.props.status) {
-            this.setState({
-                status: this.props.status
-            })
+            this.setState({ status: this.props.status })
         }
     }
 

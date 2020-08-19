@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ProfileInfo.module.scss';
 import Loading from './../../../assets/Loading/Loading';
 import maleUser from './../../../assets/img/male-user.png';
-import StatusBar from './StatusBar/StatusBar'
+import StatusBarHooks from './StatusBar/StatusBarHooks'
 
 const ProfileInfo = (props) => {
   if (!props.profile || props.isFetching) {
@@ -11,7 +11,7 @@ const ProfileInfo = (props) => {
   return (
     <div className = {styles.wrapper}>
       <div className={styles.name}>{props.profile.fullName}</div>
-      <StatusBar status = {props.status} updateStatus={props.updateStatus}/>
+      <StatusBarHooks status = {props.status} updateStatus={props.updateStatus}/>
       <div className={styles.avatar}>
         <img src = {props.profile.photos.small === null ? maleUser : props.profile.photos.small}></img>
               </div>
