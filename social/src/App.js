@@ -24,7 +24,7 @@ class App extends React.Component {
     return (
         <div className={styles.wrapper}>
           <HeaderContainer />
-          <Menu store={this.props.store} />
+          <Menu menuItems={this.props.menuItems} friendsData={this.props.friendsData} />
           <div className={styles.content}>
             <Route path='/Dialogs' render={() => <DialogsContainer />} />
             <Route path='/Profile/:userId?' render={() => <ProfileContainer />} />
@@ -41,6 +41,8 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     initUser: state.app.initUser,
+    menuItems: state.menu.menuItems,
+    friendsData: state.menu.friendsData
   }
 }
 export default compose(

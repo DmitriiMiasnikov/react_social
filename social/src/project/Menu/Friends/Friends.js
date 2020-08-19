@@ -3,7 +3,7 @@ import styles from './Friends.module.scss';
 import Friend from './Friend/Friend';
 
 const Friends = (props) => {
-  const FriendsList = props.store.getState().menu.friendsData.map((el, i) => {
+  const FriendsList = props.friendsData.map((el, i) => {
     return (
       <Friend name={el.name} key={i} />
     )
