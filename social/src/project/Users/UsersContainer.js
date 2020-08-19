@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Users from './Users'
 import { setCurrentPage, getUsersThunk, followThunk } from '../../state/usersReducer';
+import { getUsersData, getPageSize, getTotalUsersCount, 
+  getCurrentPage, getIsFetching, getFollowingProgress } from './../../state/usersSelectors'
 
 class UsersContainerInner extends React.Component {
   componentDidMount() {
@@ -11,26 +13,18 @@ class UsersContainerInner extends React.Component {
     this.props.getUsersThunk('setCurrentPage', page, this.props.pageSize)
   }
   render = () => {
-    return <Users totalUsersCount={this.props.totalUsersCount}
-      pageSize={this.props.pageSize}
-      currentPage={this.props.currentPage}
-      setCurrentPage={this.setCurrentPage}
-      usersData={this.props.usersData}
-      isFetching={this.props.isFetching}
-      followingProgress={this.props.followingProgress}
-      followThunk = {this.props.followThunk}
-    />
+    return <Users {...this.props} setCurrentPage = {this.setCurrentPage}/>
   }
 }
 
 let mapStateToProps = (state) => {
   return {
-    usersData: state.users.usersData,
-    pageSize: state.users.pageSize,
-    totalUsersCount: state.users.totalUsersCount,
-    currentPage: state.users.currentPage,
-    isFetching: state.users.isFetching,
-    followingProgress: state.users.followingProgress,
+    usersData: getUsersData(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    followingProgress: getFollowingProgress(state),
   }
 }
 
