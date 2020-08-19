@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Users from './Users'
 import { setCurrentPage, getUsersThunk, followThunk } from '../../state/usersReducer';
-import { getUsersData, getPageSize, getTotalUsersCount, 
+import { getUsersDataSelector, getPageSize, getTotalUsersCount, 
   getCurrentPage, getIsFetching, getFollowingProgress } from './../../state/usersSelectors'
 
 class UsersContainerInner extends React.Component {
@@ -19,7 +19,7 @@ class UsersContainerInner extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    usersData: getUsersData(state),
+    usersData: getUsersDataSelector(state),
     pageSize: getPageSize(state),
     totalUsersCount: getTotalUsersCount(state),
     currentPage: getCurrentPage(state),
