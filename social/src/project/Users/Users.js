@@ -14,14 +14,14 @@ const Users = (props) => {
     <div className={styles.pages}>
       {
         pages.map(el => {
-          return <div className={`${props.currentPage === el ? styles.selected : ''} ${styles.pages}`} 
+          return <div className={`${props.currentPage === el ? styles.selected : ''} ${styles.pages}`}
             key={el} onClick={() => props.setCurrentPage(el)}>{el}</div>
         })
       }
       <div className={styles.dots}>...</div>
     </div>
-    <div className = {styles.loading}>
-    { props.isFetching ? <Loading /> : null}
+    <div className={styles.loading}>
+      {props.isFetching ? <Loading /> : null}
     </div>
     {
       props.usersData.map(el => {
