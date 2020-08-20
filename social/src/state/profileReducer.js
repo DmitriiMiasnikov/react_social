@@ -65,26 +65,23 @@ export const setStatus = (status) => {
     return { type: SET_STATUS, status }
 }
 export const getUserProfile = (userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(isFetchingToggle(true))
-        profileAPI.openProfile(userId).then(data => {
-            dispatch(setUserProfile(data))
-            dispatch(isFetchingToggle(false))
-        })
+        const response = await profileAPI.openProfile(userId);
+        dispatch(setUserProfile(response))
+        dispatch(isFetchingToggle(false))
     }
 }
 export const getStatus = (profileId) => {
-    return (dispatch) => {
-        profileAPI.getStatus(profileId).then(data => {
-            dispatch(setStatus(data))
-        })
+    return async (dispatch) => {
+        const response = await profileAPI.getStatus(profileId)
+        dispatch(setStatus(response))
     }
 }
 export const updateStatus = (status) => {
-    return (dispatch) => {
-        profileAPI.updateStatus(status).then(data => {
-            dispatch(setStatus(data))
-        })
+    return async (dispatch) => {
+        const response = await profileAPI.updateStatus(status)
+        dispatch(setStatus(response))
     }
 }
 export const isFetchingToggle = (loading) => {

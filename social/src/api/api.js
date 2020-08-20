@@ -2,50 +2,56 @@ import * as axios from 'axios';
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-    withCredentials: true ,
+    withCredentials: true,
     headers: {
-      'API-KEY': 'cce9d67d-06d9-4ea4-917a-b67979dc3cd1'
+        'API-KEY': 'cce9d67d-06d9-4ea4-917a-b67979dc3cd1'
     }
 });
 
 export const usersAPI = {
-    getUsers (currentPage, pageSize) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data);
+    async getUsers(currentPage, pageSize) {
+        const response = await instance.get(`users?page=${currentPage}&count=${pageSize}`)
+        return response.data;
     },
-    authUser () {
-        return instance.get(`auth/me`).then(response => response.data)
+    async authUser() {
+        const response = await instance.get(`auth/me`)
+        return response.data;
     },
-    openProfile (userId) {
+    openProfile(userId) {
         console.warn('warning! please use profileAPI.openProfile() method')
         return profileAPI.openProfile(userId)
     },
-    followUser (id) {
+    followUser(id) {
         return instance.post(`follow/${id}`)
     }
 }
 
 export const profileAPI = {
-    openProfile (userId) {
-        return instance.get(`profile/${userId}`)
-            .then(response => response.data)
+    async openProfile(userId) {
+        const response = await instance.get(`profile/${userId}`)
+        return response.data;
+
     },
-    getStatus (userId) {
-        return instance.get(`profile/status/${userId}`)
-        .then(response => response.data)
+    async getStatus(userId) {
+        const response = await instance.get(`profile/status/${userId}`)
+        return response.data;
     },
-    updateStatus (status) {
-        return instance.put(`profile/status`, {status: status})
-        .then(response => response.data)
+    async updateStatus(status) {
+        const response = await instance.put(`profile/status`, { status: status })
+        return response.data;
     }
 }
 export const authAPI = {
-    me (email, password, rememberme) {
-        return instance.get(`auth/me`, {email, password, rememberme}).then(response => response.data);
+    async me(email, password, rememberme) {
+        const response = await instance.get(`auth/me`, { email, password, rememberme })
+        return response.data;
     },
-    login (email, password, rememberme) {
-        return instance.post(`auth/login`, {email, password, rememberme}).then(response => response.data);
+    async login(email, password, rememberme) {
+        const response = await instance.post(`auth/login`, { email, password, rememberme })
+        return response.data;
     },
-    logout () {
-        return instance.delete(`auth/login`).then(response => response.data);
+    async logout() {
+        const response = await instance.delete(`auth/login`)
+        return response.data;
     },
 }

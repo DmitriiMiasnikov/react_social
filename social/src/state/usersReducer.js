@@ -69,33 +69,30 @@ export const toggleFollowingProgress = (id, isFetching) => {
 export const getUsersThunk = (type, currentPage, pageSize) => {
     switch (type) {
         case ('didMount'): {
-            return (dispatch) => {
-                usersAPI.getUsers(currentPage, pageSize).then(data => {
-                    dispatch(isFetchingToggle(false))
-                    dispatch(setUsers(data.items))
-                    dispatch(setTotalUsersCount(data.totalCount))
-                })
+            return async (dispatch) => {
+                const response = await usersAPI.getUsers(currentPage, pageSize)
+                dispatch(isFetchingToggle(false))
+                dispatch(setUsers(response.items))
+                dispatch(setTotalUsersCount(response.totalCount))
             }
         }
         case ('setCurrentPage'): {
-            return (dispatch) => {
+            return async (dispatch) => {
                 dispatch(isFetchingToggle(true))
                 dispatch(setCurrentPage(currentPage))
-                usersAPI.getUsers(currentPage, pageSize).then(data => {
-                    dispatch(isFetchingToggle(false))
-                    dispatch(setUsers(data.items))
-                })
+                const response = await usersAPI.getUsers(currentPage, pageSize)
+                dispatch(isFetchingToggle(false))
+                dispatch(setUsers(response.items))
             }
         }
     }
 }
 export const followThunk = (id) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleFollowingProgress(id, true));
-        usersAPI.followUser(id).then(response => {
-            dispatch(toggleFollow(id))
-            dispatch(toggleFollowingProgress(id, false));
-        })
+        await usersAPI.followUser(id)
+        dispatch(toggleFollow(id))
+        dispatch(toggleFollowingProgress(id, false));
     }
 }
 
