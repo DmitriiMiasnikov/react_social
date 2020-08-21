@@ -7,13 +7,11 @@ import { NavLink } from 'react-router-dom';
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
-  console.log(props.currentPage, pagesCount)
   for (let i = props.currentPage > 3 ? props.currentPage - 3 : 1;
     i >= pagesCount - 3 ? i <= pagesCount : i <= props.currentPage + 3;
     i++) {
     pages.push(i);
   }
-  console.log(pages)
   return <div className={styles.wrapper}>
     <div className={styles.pagesWrapper}>
       {
