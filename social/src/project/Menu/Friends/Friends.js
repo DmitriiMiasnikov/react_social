@@ -10,7 +10,7 @@ const Friends = (props) => {
       <div className={styles.wrapper}>
         {
           props.friendsData ? props.friendsData.map((el, i) => {
-            return <NavLink to={`/profile/${el.id}`} key={i}>
+            return <NavLink to={`/profile/${el.id}`} key={i} onClick={() => props.getProfile(el.id)}>
             <div className={styles.item}>
               <div className={styles.avatar} >
                 <img src={el.photos.small === null ? maleUser : el.photos.small}></img>

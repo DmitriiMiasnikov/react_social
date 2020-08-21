@@ -7,7 +7,7 @@ const Header = (props) => {
         <header className = {styles.header}>
        <div className = {styles.loginBlock}>
         {
-          props.isAuth ? <div><NavLink to={`/profile/${props.id}`} >{props.login}</NavLink>
+          props.isAuth ? <div><NavLink to={`/profile/${props.id}`} onClick={() => props.getProfile(props.id)}>{props.login}</NavLink>
           <NavLink to ='/login' onClick = {() => props.logout()} className = {styles.left}>left</NavLink></div> : 
           <NavLink to = {`/login`} >login</NavLink>
         }
