@@ -5,20 +5,35 @@ import Loading from './../../assets/Loading/Loading'
 import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
-  // let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
-  for (let i = props.currentPage > 3 ? props.currentPage - 3 : 1; i <= props.currentPage + 3; i++) {
+  console.log(props.currentPage, pagesCount)
+  for (let i = props.currentPage > 3 ? props.currentPage - 3 : 1;
+    i >= pagesCount - 3 ? i <= pagesCount : i <= props.currentPage + 3;
+    i++) {
     pages.push(i);
   }
+  console.log(pages)
   return <div className={styles.wrapper}>
-    <div className={styles.pages}>
+    <div className={styles.pagesWrapper}>
+      {
+        props.currentPage > 4 ? <div className={styles.firstPageLink}>
+          <div onClick={() => props.setCurrentPage(1)} className={styles.firstPage}>1</div>
+          <div className={styles.dots}>...</div>
+        </div> : null
+      }
       {
         pages.map(el => {
           return <div className={`${props.currentPage === el ? styles.selected : ''} ${styles.pages}`}
             key={el} onClick={() => props.setCurrentPage(el)}>{el}</div>
         })
       }
-      <div className={styles.dots}>...</div>
+      {
+        props.currentPage < pagesCount - 3 ? <div className={styles.lastPageLink}>
+          <div className={styles.dots}>...</div>
+          <div onClick={() => props.setCurrentPage(pagesCount)} className={styles.lastPage}>{pagesCount}</div>
+        </div> : null
+      }
     </div>
     <div className={styles.loading}>
       {props.isFetching ? <Loading /> : null}

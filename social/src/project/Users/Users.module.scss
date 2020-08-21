@@ -2,16 +2,29 @@
     padding: 20px;
     box-sizing: border-box;
 
-    .pages {
+    .pagesWrapper {
         display: block;
         text-align: center;
         font-size: 24px;
-
+        .firstPageLink, .lastPageLink {
+            display: inline-block;
+            div {
+                display: inline-block;
+                // width: 24px;
+                margin: 2px;
+            }
+            .firstPage, .lastPage {
+                cursor: pointer;
+                &:hover {
+                    color: rgb(122, 122, 122);
+                }
+            }
+        }
         .pages {
             display: inline-block;
-            width: 32px;
+            // width: 32px;
+            margin: 2px;
             cursor: pointer;
-
             &.selected {
                 font-weight: bold;
             }
@@ -19,11 +32,6 @@
             &:hover {
                 color: rgb(122, 122, 122);
             }
-        }
-
-        .dots {
-            display: inline-block;
-            width: 32px;
         }
     }
     .loading {
