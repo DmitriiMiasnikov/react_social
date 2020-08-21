@@ -55,3 +55,10 @@ export const authAPI = {
         return response.data;
     },
 }
+
+export const friendsAPI = {
+    async getFriendsList() {
+        const response = await instance.get(`users?friend=${true}`)
+        return response.data;
+    },
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Menu.module.scss';
 import { NavLink } from 'react-router-dom';
-import Friends from './Friends/Friends';
+import FriendsContainer from './Friends/FriendsContainer';
 
 const MenuItem = (props) => {
   return (
@@ -18,7 +18,7 @@ const Menu = (props) => {
   return (
     <nav className={styles.nav}>
       {menuElements}
-      <Friends friendsData={props.friendsData} />
+      <FriendsContainer />
     </nav>
   );
 }
