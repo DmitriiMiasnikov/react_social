@@ -20,24 +20,25 @@ class App extends React.Component {
     this.props.initApp()
   }
   render() {
-    if (!this.props.initUser) return <Loading/>
+    if (!this.props.initUser) return <Loading />
     return (
-        <div className={styles.wrapper}>
-          <HeaderContainer />
-          <Menu menuItems={this.props.menuItems} friendsData={this.props.friendsData} />
-          <div className={styles.content}>
-            <Route path='/Dialogs' render={() => <DialogsContainer />} />
-            <Route path='/Profile/:userId?' render={() => <ProfileContainer />} />
-            <Route path='/Users' render={() => <UsersContainer />} />
-            <Route path='/login' render={() => <LoginContainer />} />
-            <Route path='/News' component={News} />
-            <Route path='/Music' component={Music} />
-            <Route path='/Settings' component={Settings} />
-          </div>
+      <div className={styles.wrapper}>
+        <HeaderContainer />
+        <Menu menuItems={this.props.menuItems} friendsData={this.props.friendsData} />
+        <div className={styles.content}>
+          <Route path='/Dialogs' render={() => <DialogsContainer />} />
+          <Route path='/Profile/:userId?' render={() => <ProfileContainer />} />
+          <Route path='/Users' render={() => <UsersContainer />} />
+          <Route path='/login' render={() => <LoginContainer />} />
+          <Route path='/News' component={News} />
+          <Route path='/Music' component={Music} />
+          <Route path='/Settings' component={Settings} />
         </div>
+      </div>
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     initUser: state.app.initUser,

@@ -34,7 +34,7 @@ export const isFetchingToggle = (loading) => {
 export const getFriends = (friendsData) => {
   return { type: GET_FRIENDS, friendsData }
 }
-export const getFriendsThunc = (friendsData) => {
+export const getFriendsThunc = () => {
   return async (dispatch) => {
     dispatch(isFetchingToggle(true))
     const response = await friendsAPI.getFriendsList()
