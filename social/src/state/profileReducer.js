@@ -4,7 +4,8 @@ const ADD_POST = 'ADD-POST',
     UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT',
     SET_USER_PROFILE = 'SET-USER-PROFILE',
     SET_STATUS = 'SET-STATUS',
-    IS_FETCHING = 'IS-FETCHING';
+    IS_FETCHING = 'IS-FETCHING',
+    SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
 
 let initialState = {
     postsData: [
@@ -45,6 +46,12 @@ const profileReducer = (state = initialState, action) => {
                 status: action.status
             };
         }
+        case (SAVE_PHOTO_SUCCESS): {
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            };
+        }
         case (IS_FETCHING): {
             return { ...state, isFetching: action.loading }
         }
@@ -64,6 +71,9 @@ export const setUserProfile = (profile) => {
 export const setStatus = (status) => {
     return { type: SET_STATUS, status }
 }
+export const savePhotoSuccess = (photos) => {
+    return { type: SAVE_PHOTO_SUCCESS, photos }
+}
 export const getUserProfile = (userId) => {
     return async (dispatch) => {
         dispatch(isFetchingToggle(true))
@@ -82,6 +92,12 @@ export const updateStatus = (status) => {
     return async (dispatch) => {
         const response = await profileAPI.updateStatus(status)
         dispatch(setStatus(response))
+    }
+}
+export const savePhoto = (file) => {
+    return async (dispatch) => {
+        const response = await profileAPI.updatePhoto(file)
+        dispatch(savePhotoSuccess(response.data.photos))
     }
 }
 export const isFetchingToggle = (loading) => {

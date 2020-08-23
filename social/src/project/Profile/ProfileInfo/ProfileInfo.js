@@ -1,20 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './ProfileInfo.module.scss';
 import Loading from './../../../assets/Loading/Loading';
 import maleUser from './../../../assets/img/male-user.png';
 import StatusBarHooks from './StatusBar/StatusBarHooks'
 
 const ProfileInfo = (props) => {
+  const [changePhotoMode, setChangePhotoMode] = useState(false);
+  const activeMod = () => {
+    changePhotoMode ? setChangePhotoMode(false) : setChangePhotoMode(true)
+  }
   if (!props.profile || props.isFetching) {
-    return <Loading isFetching = {props.isFetching} />
+    return <Loading isFetching={props.isFetching} />
+  }
+  const selectImg = (e) => {
+    if (e.target.files.length) {
+      props.savePhoto(e.target.files[0])
+    }
   }
   return (
-    <div className = {styles.wrapper}>
+    <div className={styles.wrapper}>
       <div className={styles.name}>{props.profile.fullName}</div>
-      <StatusBarHooks status = {props.status} updateStatus={props.updateStatus}/>
+      {
+        props.mineProfile ? <StatusBarHooks status={props.status} updateStatus={props.updateStatus} /> : null
+      }
       <div className={styles.avatar}>
-        <img src = {props.profile.photos.small === null ? maleUser : props.profile.photos.small}></img>
-              </div>
+        <img src={props.profile.photos.small === null ? maleUser : props.profile.photos.small}></img>
+      </div>
+      <div className={styles.changePhotoBlock}>
+        {
+          props.mineProfile ? <div className={styles.changePhoto}>
+            <div onClick={activeMod} className={styles.clicableText}>click to change photo</div>
+            {changePhotoMode ?
+              <input type={'file'} onChange={selectImg} ></input>
+              : null}
+          </div>
+            : null
+        }
+      </div>
       <div className={styles.text}>
         {props.profile.aboutMe}
         <br></br>

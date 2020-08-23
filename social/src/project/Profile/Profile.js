@@ -10,7 +10,8 @@ const Profile = (props) => {
         title of content
       </div>
       <ProfileInfo profile={props.profile} status={props.status} 
-        updateStatus={props.updateStatus} isFetching = {props.isFetching}/>
+        updateStatus={props.updateStatus} isFetching = {props.isFetching} 
+        mineProfile={props.mineProfile} savePhoto = {props.savePhoto}/>
       <MyPostsContainer />
     </div>
   );

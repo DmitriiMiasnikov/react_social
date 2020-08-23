@@ -26,4 +26,28 @@
     font-size: 24px;
     margin-bottom: 40px;
   }
+  .changePhotoBlock {
+    .changePhoto {
+      display: inline-block;
+      position: relative;
+      .clicableText {
+        border: 1px solid black;
+        padding: 3px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        &:hover {
+          border: 1px solid rgb(122, 122, 122);
+          color: rgb(122, 122, 122);
+      }
+      }
+      div {
+        display: inline-block;
+      }
+      input {
+        display: inline-block;
+        margin-left: 15px;
+      }
+    }
+  }
+
 }
