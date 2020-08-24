@@ -25,7 +25,8 @@ class ProfileContainer extends React.Component {
   
   render() {
     return (
-      <Profile {...this.props} mineProfile={!this.props.match.params.userId}/>
+      <Profile {...this.props} 
+        mineProfile={!this.props.match.params.userId || this.props.match.params.userId == this.props.currentLogin}/>
     )
   }
 }

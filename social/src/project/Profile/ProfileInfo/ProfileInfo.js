@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import styles from './ProfileInfo.module.scss';
 import Loading from './../../../assets/Loading/Loading';
 import maleUser from './../../../assets/img/male-user.png';
-import StatusBarHooks from './StatusBar/StatusBarHooks'
+import StatusBarHooks from './StatusBar/StatusBarHooks';
+import Description from './Description/Description'
 
 const ProfileInfo = (props) => {
   const [changePhotoMode, setChangePhotoMode] = useState(false);
@@ -38,10 +39,10 @@ const ProfileInfo = (props) => {
         }
       </div>
       <div className={styles.text}>
-        {props.profile.aboutMe}
         <br></br>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-              </div>
+      </div>
+      <Description profile = {props.profile} mineProfile = {props.mineProfile}/>
     </div>
   );
 }
