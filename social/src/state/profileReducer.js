@@ -5,7 +5,8 @@ const ADD_POST = 'ADD-POST',
     SET_USER_PROFILE = 'SET-USER-PROFILE',
     SET_STATUS = 'SET-STATUS',
     IS_FETCHING = 'IS-FETCHING',
-    SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
+    SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS',
+    CHANGE_LOOKING_FOR_A_JOB = 'CHANGE_LOOKING_FOR_A_JOB';
 
 let initialState = {
     postsData: [
@@ -55,6 +56,12 @@ const profileReducer = (state = initialState, action) => {
         case (IS_FETCHING): {
             return { ...state, isFetching: action.loading }
         }
+        case (CHANGE_LOOKING_FOR_A_JOB): {
+            return {
+                ...state,
+                profile: {...state.profile, lookingForAJob: state.profile.lookingForAJob ? false : true}
+            };
+        }
         default: break;
     }
     return state;
@@ -102,5 +109,14 @@ export const savePhoto = (file) => {
 }
 export const isFetchingToggle = (loading) => {
     return { type: IS_FETCHING, loading }
+}
+export const changeLookingForAJobSuccess = () => {
+    return { type: CHANGE_LOOKING_FOR_A_JOB }
+}
+export const changeLookingForAJob = (profile) => {
+    return async (dispatch) => {
+        await profileAPI.updateLookingJob({...profile, lookingForAJob: profile.lookingForAJob ? false : true})
+        dispatch(changeLookingForAJobSuccess())
+    }
 }
 export default profileReducer;

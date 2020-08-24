@@ -13,8 +13,7 @@ const StatusBarHooks = (props) => {
     }
     const deactivateInput = () => {
         setEditMode(false);
-        // have a bug with update status in server, now status dosn't change in server
-        // props.updateStatus(status)
+        props.updateStatus(status)
     }
     const onStatusChange = (e) => {
         setStatus(e.currentTarget.value)

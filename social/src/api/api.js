@@ -30,15 +30,18 @@ export const profileAPI = {
     async openProfile(userId) {
         const response = await instance.get(`profile/${userId}`)
         return response.data;
-
     },
     async getStatus(userId) {
         const response = await instance.get(`profile/status/${userId}`)
         return response.data;
     },
     async updateStatus(status) {
-        const response = await instance.put(`profile/status`, { status: status })
-        return response.data;
+        await instance.put(`profile/status`, { status: status })
+        return status;
+    },
+    async updateLookingJob(profile) {
+        const response = await instance.put(`profile`, profile)
+        return response;
     },
     async updatePhoto(file) {
         const formData = new FormData();

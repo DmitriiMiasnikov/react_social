@@ -11,7 +11,8 @@ const Profile = (props) => {
       </div>
       <ProfileInfo profile={props.profile} status={props.status} 
         updateStatus={props.updateStatus} isFetching = {props.isFetching} 
-        mineProfile={props.mineProfile} savePhoto = {props.savePhoto}/>
+        mineProfile={props.mineProfile} savePhoto = {props.savePhoto}
+        changeLookingForAJob={props.changeLookingForAJob}/>
       <MyPostsContainer />
     </div>
   );
