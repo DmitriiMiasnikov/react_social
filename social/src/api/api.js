@@ -67,7 +67,7 @@ export const authAPI = {
 
 export const friendsAPI = {
     async getFriendsList() {
-        const response = await instance.get(`users?friend=${true}`)
+        const response = await instance.get(`users?friend=${true}&count=6`)
         return response.data;
     },
 }
