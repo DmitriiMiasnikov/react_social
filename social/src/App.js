@@ -6,10 +6,7 @@ import ProfileContainer from './project/Profile/ProfileContainer';
 import DialogsContainer from './project/Dialogs/DialogsContainer';
 import UsersContainer from './project/Users/UsersContainer';
 import LoginContainer from './project/Login/LoginContainer';
-import News from './project/News/News';
-import Music from './project/Music/Music';
-import Settings from './project/Settings/Settings';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { initApp } from './state/appReducer';
 import { compose } from 'redux';
@@ -26,13 +23,11 @@ class App extends React.Component {
         <HeaderContainer />
         <Menu menuItems={this.props.menuItems} friendsData={this.props.friendsData} />
         <div className={styles.content}>
+          <Redirect from="/" to="/profile" />
           <Route path='/Dialogs' render={() => <DialogsContainer />} />
           <Route path='/Profile/:userId?' render={() => <ProfileContainer />} />
           <Route path='/Users' render={() => <UsersContainer />} />
           <Route path='/login' render={() => <LoginContainer />} />
-          <Route path='/News' component={News} />
-          <Route path='/Music' component={Music} />
-          <Route path='/Settings' component={Settings} />
         </div>
       </div>
     );

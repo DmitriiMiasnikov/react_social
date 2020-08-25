@@ -9,9 +9,6 @@ let initialState = {
     { id: 1, link: 'profile' },
     { id: 2, link: 'dialogs' },
     { id: 3, link: 'users' },
-    { id: 4, link: 'music' },
-    { id: 5, link: 'news' },
-    { id: 6, link: 'settings' }
   ],
 }
 

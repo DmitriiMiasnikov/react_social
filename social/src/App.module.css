@@ -15,3 +15,9 @@
   box-sizing: border-box;
   padding: 10px;
 }
+.content .error {
+  font-size: 32px;
+  margin: 30 auto;
+  position: absolute;
+  display: inline-block;
+}
