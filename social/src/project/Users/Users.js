@@ -46,7 +46,7 @@ const Users = (props) => {
               </NavLink>
               <div disabled={props.followingProgress.some(id => id === el.id)}
                 className={`${styles.button} ${el.followed ? styles.follow : ''}`}
-                onClick={() => { props.followThunk(el.id) }
+                onClick={() => { el.followed ? props.unfollowThunk(el.id) : props.followThunk(el.id) }
                 }>
                 {el.followed ? 'follow' : 'unfollow'}
               </div>

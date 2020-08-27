@@ -1,6 +1,7 @@
 import React from 'react';
 import Profile from './Profile';
 import { getUserProfile, getStatus, updateStatus, savePhoto, changeLookingForAJob } from './../../state/profileReducer';
+import { getFriendsAllThunc } from './../../state/menuReducer'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { AuthRedirect } from './../../hoc/AuthRedirect'
@@ -16,6 +17,7 @@ class ProfileContainer extends React.Component {
 
   componentDidMount() {
     this.getUser();
+    this.props.getFriendsAllThunc()
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.userId !== prevProps.match.params.userId) {
@@ -30,7 +32,6 @@ class ProfileContainer extends React.Component {
     )
   }
 }
-
 const mapStateToProps = (state) => {
   return {
     profile: state.profile.profile,
@@ -38,11 +39,12 @@ const mapStateToProps = (state) => {
     isAuth: state.auth.isAuth,
     status: state.profile.status,
     isFetching: state.profile.isFetching,
+    isFriend: state.menu.friendsData.some(el => el.id === state.profile.userId),
   }
 }
 
 export default compose(
-  connect(mapStateToProps, { getUserProfile, getStatus, updateStatus, savePhoto, changeLookingForAJob }),
+  connect(mapStateToProps, { getUserProfile, getStatus, updateStatus, savePhoto, changeLookingForAJob, getFriendsAllThunc }),
   withRouter,
   AuthRedirect,
 )(ProfileContainer);

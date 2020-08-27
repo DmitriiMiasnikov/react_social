@@ -1,10 +1,11 @@
 import { friendsAPI } from './../api/api'
 
 const GET_FRIENDS = 'GET_FRIENDS',
-  IS_FETCHING = 'IS-FETCHING';
+GET_FRIENDS_MENU = 'GET_FRIENDS_MENU';
 
 let initialState = {
-  friendsData: null,
+  friendsData: [],
+  friendsMenu: [],
   menuItems: [
     { id: 1, link: 'profile' },
     { id: 2, link: 'dialogs' },
@@ -17,26 +18,30 @@ const menuReducer = (state = initialState, action) => {
     case (GET_FRIENDS): {
       return { ...state, friendsData: action.friendsData.filter(el => el.followed) };
     }
-    case (IS_FETCHING): {
-      return { ...state, isFetching: action.loading }
+    case (GET_FRIENDS_MENU): {
+      return { ...state, friendsMenu: action.friendsMenu.filter(el => el.followed) };
     }
     default: break;
   }
   return state;
 }
 
-export const isFetchingToggle = (loading) => {
-  return { type: IS_FETCHING, loading }
-}
-export const getFriends = (friendsData) => {
+export const getFriendsAll = (friendsData) => {
   return { type: GET_FRIENDS, friendsData }
 }
-export const getFriendsThunc = () => {
+export const getFriendsMenu = (friendsMenu) => {
+  return { type: GET_FRIENDS_MENU, friendsMenu }
+}
+export const getFriendsMenuThunc = () => {
   return async (dispatch) => {
-    dispatch(isFetchingToggle(true))
-    const response = await friendsAPI.getFriendsList()
-    dispatch(isFetchingToggle(false))
-    dispatch(getFriends(response.items))
+    const response = await friendsAPI.getFriendsMenu()
+    dispatch(getFriendsMenu(response.items))
+  }
+}
+export const getFriendsAllThunc = () => {
+  return async (dispatch) => {
+    const response = await friendsAPI.getFriendsAll()
+    dispatch(getFriendsAll(response.items))
   }
 }
 

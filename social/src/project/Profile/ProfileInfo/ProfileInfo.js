@@ -20,12 +20,22 @@ const ProfileInfo = (props) => {
   }
   return (
     <div className={styles.wrapper}>
-      <div className={styles.name}>{props.profile.fullName}</div>
+      <div className={styles.name}>
+        <div>{props.profile.fullName}</div>
+      </div>
       {
         props.mineProfile ? <StatusBarHooks status={props.status} updateStatus={props.updateStatus} /> : null
       }
       <div className={styles.avatar}>
         <img src={props.profile.photos.small === null ? maleUser : props.profile.photos.small}></img>
+        {
+          !props.mineProfile ? <div
+            className={`${styles.button} ${props.isFriend ? styles.follow : ''}`}
+            onClick={() => { props.isFriend ? props.unfollowThunk(props.profile.userId) : props.followThunk(props.profile.userId) }
+            }>
+            {props.isFriend ? 'follow' : 'unfollow'}
+          </div> : null
+        }
       </div>
       <div className={styles.changePhotoBlock}>
         {
@@ -39,7 +49,6 @@ const ProfileInfo = (props) => {
         }
       </div>
       <div className={styles.text}>
-        <br></br>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
       </div>
       <Description

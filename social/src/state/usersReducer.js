@@ -95,6 +95,14 @@ export const followThunk = (id) => {
         dispatch(toggleFollowingProgress(id, false));
     }
 }
+export const unfollowThunk = (id) => {
+    return async (dispatch) => {
+        dispatch(toggleFollowingProgress(id, true));
+        await usersAPI.unfollowUser(id)
+        dispatch(toggleFollow(id))
+        dispatch(toggleFollowingProgress(id, false));
+    }
+}
 
 
 export default usersReducer;

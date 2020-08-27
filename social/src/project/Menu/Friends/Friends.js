@@ -9,7 +9,7 @@ const Friends = (props) => {
       <div className={styles.title}>Friends:</div>
       <div className={styles.wrapper}>
         {
-          props.friendsData ? props.friendsData.map((el, i) => {
+          props.friendsMenu ? props.friendsMenu.map((el, i) => {
             return <NavLink to={`/profile/${el.id}`} key={i} onClick={() => props.getProfile(el.id)}>
             <div className={styles.item}>
               <div className={styles.avatar} >

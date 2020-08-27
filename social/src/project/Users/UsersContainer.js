@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Users from './Users'
-import { setCurrentPage, getUsersThunk, followThunk } from '../../state/usersReducer';
+import { setCurrentPage, getUsersThunk, followThunk, unfollowThunk } from '../../state/usersReducer';
 import { getUsersDataSelector, getPageSize, getTotalUsersCount, 
   getCurrentPage, getIsFetching, getFollowingProgress } from './../../state/usersSelectors'
 
@@ -31,5 +31,6 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   setCurrentPage,
   getUsersThunk,
-  followThunk
+  followThunk,
+  unfollowThunk
 })(UsersContainerInner);

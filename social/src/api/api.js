@@ -23,6 +23,9 @@ export const usersAPI = {
     },
     followUser(id) {
         return instance.post(`follow/${id}`)
+    },
+    unfollowUser(id) {
+        return instance.delete(`follow/${id}`)
     }
 }
 
@@ -66,8 +69,12 @@ export const authAPI = {
 }
 
 export const friendsAPI = {
-    async getFriendsList() {
+    async getFriendsMenu() {
         const response = await instance.get(`users?friend=${true}&count=6`)
+        return response.data;
+    },
+    async getFriendsAll() {
+        const response = await instance.get(`users?friend=${true}&count=100`)
         return response.data;
     },
 }
