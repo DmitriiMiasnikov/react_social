@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from './Profile';
-import { getUserProfile, getStatus, updateStatus, savePhoto, changeLookingForAJob } from './../../state/profileReducer';
-import { isFriendThunc, toggleFollow } from './../../state/menuReducer';
+import { getUserProfile, getStatus, updateStatus, savePhoto, 
+  changeLookingForAJob, isFriendThunc, toggleFollow } from './../../state/profileReducer';
 import { followThunk, unfollowThunk } from './../../state/usersReducer'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';

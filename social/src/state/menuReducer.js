@@ -1,4 +1,4 @@
-import { friendsAPI } from './../api/api'
+import { friendsAPI } from './../api/api';
 
 const GET_FRIENDS = 'GET_FRIENDS',
 GET_FRIENDS_MENU = 'GET_FRIENDS_MENU',
@@ -13,7 +13,6 @@ let initialState = {
     { id: 2, link: 'dialogs' },
     { id: 3, link: 'users' },
   ],
-  isFriend: false,
 }
 
 const menuReducer = (state = initialState, action) => {
@@ -41,12 +40,6 @@ export const getFriendsAll = (friendsData) => {
 export const getFriendsMenu = (friendsMenu) => {
   return { type: GET_FRIENDS_MENU, friendsMenu }
 }
-export const isFriendCheck = (friendsArr, id) => {
-  return { type: IS_FRIEND, friendsArr, id }
-}
-export const toggleFollow = () => {
-  return { type: TOGGLE_FOLLOW }
-}
 export const getFriendsMenuThunc = () => {
   return async (dispatch) => {
     const response = await friendsAPI.getFriendsMenu()
@@ -59,11 +52,4 @@ export const getFriendsAllThunc = () => {
     dispatch(getFriendsAll(response.items))
   }
 }
-export const isFriendThunc = (id) => {
-  return async (dispatch) => {
-    const response = await friendsAPI.getFriendsAll()
-    dispatch(isFriendCheck(response.items, id))
-  }
-}
-
 export default menuReducer;

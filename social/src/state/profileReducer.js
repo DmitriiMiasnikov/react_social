@@ -1,4 +1,4 @@
-import { profileAPI } from './../api/api'
+import { profileAPI, friendsAPI } from './../api/api'
 
 const ADD_POST = 'ADD-POST',
     UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT',
@@ -6,7 +6,9 @@ const ADD_POST = 'ADD-POST',
     SET_STATUS = 'SET-STATUS',
     IS_FETCHING = 'IS-FETCHING',
     SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS',
-    CHANGE_LOOKING_FOR_A_JOB = 'CHANGE_LOOKING_FOR_A_JOB';
+    CHANGE_LOOKING_FOR_A_JOB = 'CHANGE_LOOKING_FOR_A_JOB',
+    IS_FRIEND = 'IS_FRIEND',
+    TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
 
 let initialState = {
     postsData: [
@@ -17,6 +19,7 @@ let initialState = {
     profile: null,
     status: '',
     isFetching: true,
+    isFriend: false,
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -50,7 +53,7 @@ const profileReducer = (state = initialState, action) => {
         case (SAVE_PHOTO_SUCCESS): {
             return {
                 ...state,
-                profile: {...state.profile, photos: action.photos}
+                profile: { ...state.profile, photos: action.photos }
             };
         }
         case (IS_FETCHING): {
@@ -59,8 +62,14 @@ const profileReducer = (state = initialState, action) => {
         case (CHANGE_LOOKING_FOR_A_JOB): {
             return {
                 ...state,
-                profile: {...state.profile, lookingForAJob: state.profile.lookingForAJob ? false : true}
+                profile: { ...state.profile, lookingForAJob: state.profile.lookingForAJob ? false : true }
             };
+        }
+        case (IS_FRIEND): {
+            return { ...state, isFriend: action.friendsArr.some(el => el.id === Number(action.id)) };
+        }
+        case (TOGGLE_FOLLOW): {
+            return { ...state, isFriend: !state.isFriend };
         }
         default: break;
     }
@@ -115,8 +124,21 @@ export const changeLookingForAJobSuccess = () => {
 }
 export const changeLookingForAJob = (profile) => {
     return async (dispatch) => {
-        await profileAPI.updateLookingJob({...profile, lookingForAJob: profile.lookingForAJob ? false : true})
+        await profileAPI.updateLookingJob({ ...profile, lookingForAJob: profile.lookingForAJob ? false : true })
         dispatch(changeLookingForAJobSuccess())
     }
 }
+export const isFriendCheck = (friendsArr, id) => {
+    return { type: IS_FRIEND, friendsArr, id }
+}
+export const toggleFollow = () => {
+    return { type: TOGGLE_FOLLOW }
+}
+export const isFriendThunc = (id) => {
+    return async (dispatch) => {
+        const response = await friendsAPI.getFriendsAll()
+        dispatch(isFriendCheck(response.items, id))
+    }
+}
+
 export default profileReducer;
