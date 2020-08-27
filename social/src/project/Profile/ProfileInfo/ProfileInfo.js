@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './ProfileInfo.module.scss';
 import Loading from './../../../assets/Loading/Loading';
 import maleUser from './../../../assets/img/male-user.png';
@@ -7,6 +7,7 @@ import Description from './Description/Description'
 
 const ProfileInfo = (props) => {
   const [changePhotoMode, setChangePhotoMode] = useState(false);
+  const [friend, setFriend] = useState(props.isFriend);
   const activeMod = () => {
     changePhotoMode ? setChangePhotoMode(false) : setChangePhotoMode(true)
   }
@@ -30,10 +31,13 @@ const ProfileInfo = (props) => {
         <img src={props.profile.photos.small === null ? maleUser : props.profile.photos.small}></img>
         {
           !props.mineProfile ? <div
-            className={`${styles.button} ${props.isFriend ? styles.follow : ''}`}
-            onClick={() => { props.isFriend ? props.unfollowThunk(props.profile.userId) : props.followThunk(props.profile.userId) }
+            className={`${styles.button} ${friend ? styles.follow : ''}`}
+            onClick={() => { 
+              friend ? props.unfollowThunk(props.profile.userId) : props.followThunk(props.profile.userId) 
+              setFriend(!friend)
+            }
             }>
-            {props.isFriend ? 'follow' : 'unfollow'}
+            {friend ? 'follow' : 'unfollow'}
           </div> : null
         }
       </div>
