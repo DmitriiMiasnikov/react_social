@@ -7,7 +7,6 @@ import Description from './Description/Description'
 
 const ProfileInfo = (props) => {
   const [changePhotoMode, setChangePhotoMode] = useState(false);
-  const [friend, setFriend] = useState(props.isFriend);
   const activeMod = () => {
     changePhotoMode ? setChangePhotoMode(false) : setChangePhotoMode(true)
   }
@@ -31,13 +30,13 @@ const ProfileInfo = (props) => {
         <img src={props.profile.photos.small === null ? maleUser : props.profile.photos.small}></img>
         {
           !props.mineProfile ? <div
-            className={`${styles.button} ${friend ? styles.follow : ''}`}
-            onClick={() => { 
-              friend ? props.unfollowThunk(props.profile.userId) : props.followThunk(props.profile.userId) 
-              setFriend(!friend)
+            className={`${styles.button} ${props.isFriend ? styles.follow : ''}`}
+            onClick={() => {
+              props.isFriend ? props.unfollowThunk(props.profile.userId) : props.followThunk(props.profile.userId) 
+             props.toggleFollow()
             }
             }>
-            {friend ? 'follow' : 'unfollow'}
+            {props.isFriend ? 'follow' : 'unfollow'}
           </div> : null
         }
       </div>

@@ -2,7 +2,8 @@ import { friendsAPI } from './../api/api'
 
 const GET_FRIENDS = 'GET_FRIENDS',
 GET_FRIENDS_MENU = 'GET_FRIENDS_MENU',
-IS_FRIEND = 'IS_FRIEND';
+IS_FRIEND = 'IS_FRIEND',
+TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
 
 let initialState = {
   friendsData: [],
@@ -26,6 +27,9 @@ const menuReducer = (state = initialState, action) => {
     case (IS_FRIEND): {
       return { ...state, isFriend: action.friendsArr.some(el => el.id === Number(action.id)) };
     }
+    case (TOGGLE_FOLLOW): {
+      return { ...state, isFriend: !state.isFriend };
+    }
     default: break;
   }
   return state;
@@ -37,8 +41,11 @@ export const getFriendsAll = (friendsData) => {
 export const getFriendsMenu = (friendsMenu) => {
   return { type: GET_FRIENDS_MENU, friendsMenu }
 }
-export const isFriend = (friendsArr, id) => {
+export const isFriendCheck = (friendsArr, id) => {
   return { type: IS_FRIEND, friendsArr, id }
+}
+export const toggleFollow = () => {
+  return { type: TOGGLE_FOLLOW }
 }
 export const getFriendsMenuThunc = () => {
   return async (dispatch) => {
@@ -55,7 +62,7 @@ export const getFriendsAllThunc = () => {
 export const isFriendThunc = (id) => {
   return async (dispatch) => {
     const response = await friendsAPI.getFriendsAll()
-    dispatch(isFriend(response.items, id))
+    dispatch(isFriendCheck(response.items, id))
   }
 }
 

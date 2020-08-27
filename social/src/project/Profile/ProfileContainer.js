@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from './Profile';
 import { getUserProfile, getStatus, updateStatus, savePhoto, changeLookingForAJob } from './../../state/profileReducer';
-import { isFriendThunc } from './../../state/menuReducer';
+import { isFriendThunc, toggleFollow } from './../../state/menuReducer';
 import { followThunk, unfollowThunk } from './../../state/usersReducer'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -46,7 +46,7 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, { getUserProfile, getStatus, updateStatus, savePhoto, 
-    changeLookingForAJob, isFriendThunc, unfollowThunk, followThunk }),
+    changeLookingForAJob, isFriendThunc, unfollowThunk, followThunk, toggleFollow }),
   withRouter,
   AuthRedirect,
 )(ProfileContainer);
